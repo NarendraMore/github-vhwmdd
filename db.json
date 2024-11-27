@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "name": "Product A",
+      "price": 200,
+      "category": "Category 1",
+      "id": "099d"
+    },
+    {
+      "name": "Product B",
+      "price": 300,
+      "category": "Category 2",
+      "id": "0092"
+    },
+    {
+      "name": "Product C",
+      "price": 400,
+      "category": "Category 3",
+      "id": "5bbb"
+    },
+    {
+      "name": "Product E",
+      "price": 550,
+      "category": "Category 5",
+      "id": "cc6f"
+    },
+    {
+      "id": "9653",
+      "name": "Product D",
+      "price": 500,
+      "category": "Category 4"
+    },
+    {
+      "id": "ff51",
+      "name": "Product F",
+      "price": 600,
+      "category": "Category 6"
+    }
+  ]
+}

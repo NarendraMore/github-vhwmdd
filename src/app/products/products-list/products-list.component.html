@@ -1,0 +1,139 @@
+<div class="button-container">
+    <!-- Add New Button -->
+    <button
+      pButton
+      class="add-new-button"
+      label="Add New"
+      (click)="openNew()"
+    ></button>
+    <div class="tableCard">
+        <p-table [value]="products" [paginator]="true" [rows]="2" [totalRecords]="totalRecords" (onLazyLoad)="loadProductsLazy($event)">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+              <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.category }}</td>
+                <td>
+                  <button pButton class="editButton" type="button" icon="pi pi-pencil" (click)="editProduct(product)" title="Edit"></button>
+                  <button pButton class="deleteButton" type="button" icon="pi pi-trash" (click)="deleteProduct(product.id)" title="Delete"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          
+    </div>
+  
+    <!-- Product Dialog with Form for Add/Edit -->
+    <p-dialog
+      header="Product"
+      [(visible)]="productDialog"
+      [modal]="true"
+      [closable]="false"
+    >
+      <form [formGroup]="productForm">
+        <div class="form-grid">
+          <div>
+            <label for="name">Product Name <span style="color:red;">*</span></label> 
+            <input
+              id="name"
+              placeholder="Enter Name"
+              type="text"
+              pInputText
+              formControlName="name"
+            />
+            <small
+              *ngIf="
+                productForm.get('name')?.invalid &&
+                productForm.get('name')?.touched
+              "
+              class="error-text"
+            >
+              Product name is required.
+            </small>
+          </div>
+          <div>
+            <label for="price">Price <span style="color:red;">*</span></label>
+            <input
+              id="price"
+              type="number"
+              placeholder="Enter Price"
+              pInputText
+              formControlName="price"
+            />
+            <small
+              *ngIf="
+                productForm.get('price')?.invalid &&
+                productForm.get('price')?.touched
+              "
+              class="error-text"
+            >
+              Price is required and must be greater than 0.
+            </small>
+          </div>
+          <div>
+            <label for="category">Category <span style="color:red;">*</span></label>
+            <input
+              id="category"
+              placeholder="Enter Category"
+              type="text"
+              pInputText
+              formControlName="category"
+            />
+            <small
+              *ngIf="
+                productForm.get('category')?.invalid &&
+                productForm.get('category')?.touched
+              "
+              class="error-text"
+            >
+              Category is required.
+            </small>
+          </div>
+        </div>
+  
+        <hr />
+  
+        <div class="buttonStyle">
+          <button
+            pButton
+            class="cancelButton"
+            (click)="onclickCancel()"
+            label="Cancel"
+          ></button>
+          <button
+            pButton
+            class="submitButton"
+            (click)="saveProduct()"
+            type="submit"
+            label="Save"
+            [disabled]="productForm.invalid"
+          ></button>
+        </div>
+      </form>
+    </p-dialog>
+  
+    <!-- Chart -->
+    <div class="chartCard">
+      <span class="headingChart">Chart</span>
+      <ngx-charts-bar-vertical
+        [view]="view"
+      
+        [results]="chartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="false"
+        [legend]="true"
+        [showDataLabel]="true"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+  
